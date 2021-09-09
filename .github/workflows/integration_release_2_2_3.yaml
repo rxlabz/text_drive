@@ -1,0 +1,38 @@
+name: integration-release
+on:
+  push:
+    branches:
+      - master
+
+  workflow_dispatch:
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: subosito/flutter-action@v1
+        with:
+          flutter-version: '2.2.3'
+          channel: 'stable'
+      - id: integration-test
+        run: |
+          git clone https://github.com/flutter/web_installers
+          pushd web_installers/packages/web_drivers/
+          pub get
+          dart lib/web_driver_installer.dart chromedriver --install-only \
+          --driver-version="93.0.4577.63"
+          ./chromedriver/chromedriver --port=4444 &
+          popd
+          flutter drive --release \
+            --driver=test_driver/integration_test.dart \
+            --target=integration_test/textinput_test.dart \
+            --browser-name=chrome \
+            --web-port=8001 \
+            -d web-server
+
