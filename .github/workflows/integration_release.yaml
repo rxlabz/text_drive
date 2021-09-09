@@ -20,7 +20,7 @@ jobs:
         with:
           channel: 'stable'
       - id: integration-test
-        run:
+        run: |
           git clone https://github.com/flutter/web_installers
           pushd web_installers/packages/web_drivers/
           pub get
