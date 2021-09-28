@@ -5,6 +5,8 @@ import 'package:text_drive/main.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
+  
+  tester.testTextInput.register();
 
   testWidgets("failing test example", (WidgetTester tester) async {
     await tester.pumpWidget(const App());
