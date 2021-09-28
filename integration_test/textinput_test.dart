@@ -5,10 +5,9 @@ import 'package:text_drive/main.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
-  
-  tester.testTextInput.register();
 
   testWidgets("failing test example", (WidgetTester tester) async {
+    tester.testTextInput.register();
     await tester.pumpWidget(const App());
 
     final input = find.byKey(const Key('field'));
