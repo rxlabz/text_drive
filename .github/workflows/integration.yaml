@@ -29,7 +29,7 @@ jobs:
           pushd web_installers/packages/web_drivers/
           pub get
           dart lib/web_driver_installer.dart chromedriver --install-only \
-            --driver-version="93.0.4577.63"
+            --driver-version="97.0.4692.71"
           ./chromedriver/chromedriver --port=4444 &
           popd
           flutter drive \
