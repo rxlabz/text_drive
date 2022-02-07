@@ -6,27 +6,31 @@ import 'package:text_drive/main.dart';
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
-  testWidgets("failing test example", (WidgetTester tester) async {
-    await tester.pumpWidget(const App());
+  testWidgets(
+    "failing test example",
+    (WidgetTester tester) async {
+      await tester.pumpWidget(const App());
 
-    final input = find.byKey(const Key('field'));
-    expect(input, findsOneWidget);
+      final input = find.byKey(const Key('field'));
+      expect(input, findsOneWidget);
 
-    expect(find.text('test'), findsOneWidget);
+      expect(find.text('test'), findsOneWidget);
 
-    await tester.tap(input);
-    await tester.enterText(input, 'Hello');
+      await tester.tap(input);
+      await tester.enterText(input, 'Hello');
 
-    // same result with `updateEditingValue`
-    // (cf.https://flutter.dev/docs/release/breaking-changes/enterText-trailing-caret)
-    // await tester.showKeyboard(input);
-    // await tester.pumpAndSettle();
-    //tester.testTextInput.updateEditingValue(
-    //  const TextEditingValue(text: 'Hello'),
-    //);
+      // same result with `updateEditingValue`
+      // (cf.https://flutter.dev/docs/release/breaking-changes/enterText-trailing-caret)
+      // await tester.showKeyboard(input);
+      // await tester.pumpAndSettle();
+      //tester.testTextInput.updateEditingValue(
+      //  const TextEditingValue(text: 'Hello'),
+      //);
 
-    await tester.pump();
+      await tester.pump();
 
-    expect(find.text('Hello'), findsNWidgets(2));
-  });
+      expect(find.text('Hello'), findsNWidgets(2));
+    },
+    semanticsEnabled:false,
+  );
 }
