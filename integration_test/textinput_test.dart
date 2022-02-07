@@ -9,6 +9,7 @@ void main() {
   testWidgets(
     "failing test example",
     (WidgetTester tester) async {
+      tester.testTextInput.register();
       await tester.pumpWidget(const App());
 
       final input = find.byKey(const Key('field'));
